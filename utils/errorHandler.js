@@ -1,7 +1,7 @@
 class BadRequestError extends Error {
-  constructor(message) {
+  constructor(message, statusCode) {
     super(message);
-    this.statusCode = 400;
+    this.statusCode = statusCode;
   }
 }
 
@@ -9,13 +9,6 @@ class NotFoundError extends Error {
   constructor(message) {
     super(message);
     this.statusCode = 404;
-  }
-}
-
-class InternalServerError extends Error {
-  constructor(message) {
-    super(message);
-    this.statusCode = 500;
   }
 }
 
@@ -41,10 +34,9 @@ class ConflictError extends Error {
 }
 
 module.exports = {
-  InternalServerError,
   NotFoundError,
   ForbiddenError,
-  BadRequestError,
   UnauthorizedError,
   ConflictError,
+  BadRequestError,
 };

@@ -2,13 +2,6 @@ const mongoose = require('mongoose');
 
 const validate = require('validator');
 
-const validateUrl = () => {
-  return validate.isURL(v, {
-    require_protocol: true,
-    allow_underscore: true,
-  });
-};
-
 const articleSchema = new mongoose.Schema({
   keyword: {
     type: String,
@@ -35,7 +28,10 @@ const articleSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        validateUrl;
+        return validate.isURL(v, {
+          require_protocol: true,
+          allow_underscore: true,
+        });
       },
     },
   },
@@ -44,7 +40,10 @@ const articleSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        validateUrl;
+        return validate.isURL(v, {
+          require_protocol: true,
+          allow_underscore: true,
+        });
       },
     },
   },

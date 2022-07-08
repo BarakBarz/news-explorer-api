@@ -2,7 +2,10 @@ const {
   BadRequestError,
   ForbiddenError,
   NotFoundError,
-} = require('../errors/errorHandler');
+} = require('../utils/errorHandler');
+
+const { messages } = require('../utils/constants');
+
 const Article = require('../models/article');
 const User = require('../models/user');
 
@@ -12,7 +15,7 @@ const getUserArticles = async (req, res, next) => {
   try {
     const articles = await Article.find({
       owner: _id,
-    }).orFail(new NotFoundError('No articles found'));
+    }).orFail(new NotFoundError(messages.notFound));
 
     res.send(articles);
   } catch (e) {
@@ -23,12 +26,11 @@ const getUserArticles = async (req, res, next) => {
 
 const createSavedArticle = async (req, res, next) => {
   const { _id } = req.user;
-  const { keyword, title, text, date, source, link, image } =
-    req.body;
+  const {
+    keyword, title, text, date, source, link, image,
+  } = req.body;
   try {
     const user = await User.findById({ _id });
-    console.log('user:', user);
-    console.log('req.body:', req.body);
 
     const newArticle = await Article.create({
       keyword,
@@ -42,14 +44,13 @@ const createSavedArticle = async (req, res, next) => {
     });
 
     if (!newArticle) {
-      throw new BadRequestError('Invalid or missing data');
+      throw new BadRequestError(messages.invalid);
     }
 
     res.status(201).send(newArticle);
   } catch (e) {
     if (e.name === 'ValidationError') {
-      next(BadRequestError('Invalid User Id'));
-      return;
+      next(BadRequestError(messages.invalid));
     } else {
       console.log('Caught the error:', e);
       next(e);
@@ -63,23 +64,21 @@ const deleteSavedArticle = async (req, res, next) => {
 
   try {
     const articleById = await Article.findById(articleId).select(
-      '+owner'
+      '+owner',
     );
 
     if (!articleById) {
-      throw new NotFoundError('No article by that id');
+      throw new NotFoundError(messages.notFound);
     }
 
     const articleOwnerId = articleById.owner.toHexString();
 
     if (articleOwnerId !== _id) {
-      throw new ForbiddenError(
-        'Can not delete an article saved by someone else'
-      );
+      throw new ForbiddenError(messages.forbidden);
     }
 
     const removeArticle = await Article.findByIdAndDelete(
-      articleId
+      articleId,
     );
     if (!removeArticle) {
       throw new Error();

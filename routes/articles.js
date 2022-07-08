@@ -1,10 +1,8 @@
+const articlesRouter = require('express').Router();
+
 const { celebrate, Joi } = require('celebrate');
 
-const express = require('express');
-
-const { isURLValid } = require('../utils/constants');
-
-const router = express.Router();
+const { isURLValid } = require('../helper/validation');
 
 const {
   getUserArticles,
@@ -12,9 +10,9 @@ const {
   deleteSavedArticle,
 } = require('../controllers/articles');
 
-router.get('/', getUserArticles);
+articlesRouter.get('/', getUserArticles);
 
-router.post(
+articlesRouter.post(
   '/',
   celebrate({
     body: Joi.object().keys({
@@ -27,10 +25,10 @@ router.post(
       image: Joi.string().required().required(isURLValid),
     }),
   }),
-  createSavedArticle
+  createSavedArticle,
 );
 
-router.delete(
+articlesRouter.delete(
   '/:articleId',
   celebrate({
     params: Joi.object().keys({
@@ -41,7 +39,7 @@ router.delete(
         .hex(),
     }),
   }),
-  deleteSavedArticle
+  deleteSavedArticle,
 );
 
-module.exports = router;
+module.exports = articlesRouter;
