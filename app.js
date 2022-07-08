@@ -79,9 +79,6 @@ app.use(errorLogger);
 app.use(errors());
 app.use(centralErrHandler);
 
-console.log('NODE_ENV:', NODE_ENV);
-
-if (NODE_ENV !== 'production')
-  app.listen(PORT, () => {
-    console.log('running on PORT: ', PORT);
-  });
+app.listen(PORT, () => {
+  console.log('running on PORT: ', PORT);
+});
