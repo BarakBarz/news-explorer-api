@@ -36,8 +36,6 @@ const getUserInfo = (req, res, next) => {
 const createUser = async (req, res, next) => {
   const { email, password, name } = req.body;
 
-  console.log(email, password, name);
-
   try {
     const isEmailExist = await User.findOne({ email });
 
@@ -74,6 +72,7 @@ const createUser = async (req, res, next) => {
       email,
     });
   } catch (e) {
+    console.log('Error in registration:', e);
     next(e);
   }
 };
@@ -106,9 +105,15 @@ const login = (req, res, next) => {
           );
           res.send({ token });
         })
-        .catch(next);
+        .catch((e) => {
+          console.log('Error in login token creation:', e);
+          next(e);
+        });
     })
-    .catch(next);
+    .catch((e) => {
+      console.log('Error in login:', e);
+      next(e);
+    });
 };
 
 module.exports = {
