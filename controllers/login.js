@@ -25,7 +25,7 @@ const login = (req, res, next) => {
   User.findOne({ email })
     .select('+password')
     .orFail(
-      new UnauthorizedError(messages.incorrectEmailOrPassword)
+      new UnauthorizedError(messages.incorrectEmailOrPassword),
     )
     .then((user) => {
       bcrypt
@@ -33,13 +33,13 @@ const login = (req, res, next) => {
         .then((match) => {
           if (!match) {
             throw new UnauthorizedError(
-              messages.incorrectEmailOrPassword
+              messages.incorrectEmailOrPassword,
             );
           }
           const token = jwt.sign(
             { _id: user._id },
             NODE_ENV === 'production' ? JWT_SECRET : DEV_KEY,
-            { expiresIn: '7d' }
+            { expiresIn: '7d' },
           );
           res.send({ token });
         })
