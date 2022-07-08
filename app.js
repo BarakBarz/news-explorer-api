@@ -31,11 +31,7 @@ const centralErrHandler = require('./middlewares/centralErrHandler');
 
 const app = express();
 
-mongoose.connect(
-  NODE_ENV === 'production'
-    ? MONGO_URL
-    : 'mongodb://localhost:27017/finalproject',
-);
+mongoose.connect(MONGO_URL);
 
 app.use(cors());
 app.options('*', cors());
