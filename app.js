@@ -58,8 +58,8 @@ app.use(errors());
 
 app.use(centralErrHandler);
 
-if (NODE_ENV !== 'test') {
-  app.listen(PORT, () => {
+app.listen(PORT, () => {
+  if (NODE_ENV !== 'production') {
     console.log('running on PORT: ', PORT);
-  });
-}
+  }
+});
