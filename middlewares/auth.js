@@ -14,17 +14,17 @@ const auth = (req, res, next) => {
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
     console.log('No Authorization!!!');
-    throw new UnauthorizedError(messages.UnauthorizedError);
+    throw new UnauthorizedError(messages.unauthorized);
   }
   const token = authorization.replace('Bearer ', '');
   let payload;
   try {
     payload = jwt.verify(
       token,
-      NODE_ENV === 'production' ? JWT_SECRET : DEV_KEY,
+      NODE_ENV === 'production' ? JWT_SECRET : DEV_KEY
     );
   } catch (err) {
-    next(new UnauthorizedError(messages.UnauthorizedError));
+    next(new UnauthorizedError(messages.unauthorized));
   }
 
   req.user = payload;
