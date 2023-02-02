@@ -14,16 +14,9 @@ const helmet = require('helmet');
 
 const { limiter } = require('./middlewares/rateLimiter');
 
-const {
-  MONGO_URL,
-  PORT,
-  NODE_ENV,
-} = require('./utils/constants');
+const { MONGO_URL, PORT, NODE_ENV } = require('./utils/constants');
 
-const {
-  requestLogger,
-  errorLogger,
-} = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const indexRouter = require('./routes/index');
 
@@ -50,7 +43,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use('/', indexRouter);
+app.use('/api/v1', indexRouter);
 
 app.use(errorLogger);
 
@@ -63,3 +56,4 @@ app.listen(PORT, () => {
     console.log('running on PORT: ', PORT);
   }
 });
+
