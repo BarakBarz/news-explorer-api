@@ -24,8 +24,6 @@ const centralErrHandler = require('./middlewares/centralErrHandler');
 
 const app = express();
 
-mongoose.connect(MONGO_URL);
-
 app.use(cors());
 app.options('*', cors());
 
@@ -51,9 +49,18 @@ app.use(errors());
 
 app.use(centralErrHandler);
 
-app.listen(PORT, () => {
-  if (NODE_ENV !== 'production') {
-    console.log('running on PORT: ', PORT);
-  }
-});
+mongoose
+  .connect(MONGO_URL)
+  .then(() => {
+    console.log('MongoDB connected');
+    app.listen(PORT, () => {
+      if (NODE_ENV !== 'production') {
+        console.log('running on PORT: ', PORT);
+      }
+    });
+  })
+  .catch((err) => {
+    console.log({ err });
+    process.exit(1);
+  });
 
