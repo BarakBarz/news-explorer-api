@@ -1,6 +1,5 @@
 {
   "name": "news-explorer-api",
-  "type": "module",
   "version": "1.0.0",
   "description": "Express server that handles Authentication, Registration, Login and Saved articles for a news search engine",
   "main": "app.js",
