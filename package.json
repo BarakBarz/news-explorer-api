@@ -1,27 +1,14 @@
 {
   "name": "news-explorer-api",
+  "type": "module",
   "version": "1.0.0",
   "description": "Express server that handles Authentication, Registration, Login and Saved articles for a news search engine",
   "main": "app.js",
-  "scripts": {
-    "lint": "npx eslint .",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BarakB1991/news-explorer-api.git"
-  },
-  "keywords": [
-    "REST",
-    "API"
-  ],
   "author": "Barak Barzilay",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/BarakB1991/news-explorer-api/issues"
+  "scripts": {
+    "start": "nodemon app.js"
   },
-  "homepage": "https://github.com/BarakB1991/news-explorer-api#readme",
   "devDependencies": {
     "eslint": "^8.15.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -46,3 +33,4 @@
     "bcrypt": "^5.0.1"
   }
 }
+
