@@ -6,7 +6,7 @@
   "author": "Barak Barzilay",
   "license": "ISC",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "dev": "nodemon app.js"
   },
   "devDependencies": {
