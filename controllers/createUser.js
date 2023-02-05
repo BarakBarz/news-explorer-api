@@ -15,7 +15,7 @@ const createUser = async (req, res, next) => {
       throw new ConflictError(messages.conflict);
     }
 
-    const hashedPassword = await bcrypt.hash(password, SALT);
+    const hashedPassword = await bcrypt.hash(password, parseInt(SALT));
 
     if (!hashedPassword) {
       throw new Error('error');
@@ -47,3 +47,4 @@ const createUser = async (req, res, next) => {
 module.exports = {
   createUser,
 };
+
