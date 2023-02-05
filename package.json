@@ -2,12 +2,12 @@
   "name": "news-explorer-api",
   "version": "1.0.0",
   "description": "Express server that handles Authentication, Registration, Login and Saved articles for a news search engine",
-  "main": "app.js",
+  "main": "index.js",
   "author": "Barak Barzilay",
   "license": "ISC",
   "scripts": {
-    "start": "nodemon app.js",
-    "dev": "nodemon app.js"
+    "start": "nodemon index.js",
+    "dev": "nodemon index.js"
   },
   "devDependencies": {
     "eslint": "^8.15.0",
