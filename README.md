@@ -1,5 +1,9 @@
 # news-explorer-api
 
-API to respond with news article items based on a related frontend search engine
+An API to respond with news article items based on a related frontend search
+engine
 
-Adress: https://api.barakfinalproject.students.nomoredomainssbs.ru
+Currently set to be hosted as serverless function on Vercel!
+
+Adress: https://news-explorer-frontend-barakb1991.vercel.app/
+
