@@ -6,7 +6,8 @@
   "author": "Barak Barzilay",
   "license": "ISC",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "devDependencies": {
     "eslint": "^8.15.0",

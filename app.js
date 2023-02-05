@@ -6,6 +6,8 @@ const cors = require('cors');
 
 const express = require('express');
 
+const http = require('http');
+
 const { errors } = require('celebrate');
 
 const mongoose = require('mongoose');
@@ -43,6 +45,8 @@ app.get('/crash-test', () => {
 
 app.use('/api/v1', indexRouter);
 
+const server = http.createServer(app);
+
 app.use(errorLogger);
 
 app.use(errors());
@@ -53,7 +57,7 @@ mongoose
   .connect(MONGO_URL)
   .then(() => {
     console.log('MongoDB connected');
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       if (NODE_ENV !== 'production') {
         console.log('running on PORT: ', PORT);
       }
@@ -65,3 +69,4 @@ mongoose
   });
 
 module.exports = app;
+
